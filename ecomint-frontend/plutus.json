@@ -1,0 +1,80 @@
+{
+  "preamble": {
+    "title": "ecomint/eco2",
+    "description": "Aiken contracts for project 'ecomint/eco2'",
+    "version": "0.0.0",
+    "plutusVersion": "v3",
+    "compiler": {
+      "name": "Aiken",
+      "version": "v1.1.21+42babe5"
+    },
+    "license": "Apache-2.0"
+  },
+  "validators": [
+    {
+      "title": "ecomint.ecomint.spend",
+      "datum": {
+        "title": "datum",
+        "schema": {
+          "$ref": "#/definitions/ecomint~1MarketplaceDatum"
+        }
+      },
+      "redeemer": {
+        "title": "_redeemer",
+        "schema": {
+          "$ref": "#/definitions/Data"
+        }
+      },
+      "compiledCode": "59018801010029800aba2aba1aba0aab9faab9eaab9dab9a488888896600264646644b30013370e900118031baa00189919912cc004cdc3a400060126ea8006266446464660020026eb0c00cc038dd51808805912cc00400629422b3001325980099baf301330103754602660206ea8004cdd2a400066024602660206ea80192f5c11337120086466446600400400244b3001001801c4c8c96600266e45221000018acc004cdc7a4410000189bad3015002802a026899802002180c801a026375c6026002602c00280a0c8c8cc004004dd5980b180b98099baa0042259800800c00e26464b300133722911000018acc004cdc7a4410000189bab3016002802a028899802002180d001a028375c6028002602e00280a852f5bded8c0290004528201c30120018a518998010011809800a01a404066e08dd6980098061baa002375a601e60206020602060186ea8008c034c028dd50009180718079807800c5900818058009805980600098039baa0018b200a300800130083009001300800130033754011149a26cac80081",
+      "hash": "53daff3e4fed2ed85c99e693ed6a72071ee81495991edfe31d5abe43"
+    },
+    {
+      "title": "ecomint.ecomint.else",
+      "redeemer": {
+        "schema": {}
+      },
+      "compiledCode": "59018801010029800aba2aba1aba0aab9faab9eaab9dab9a488888896600264646644b30013370e900118031baa00189919912cc004cdc3a400060126ea8006266446464660020026eb0c00cc038dd51808805912cc00400629422b3001325980099baf301330103754602660206ea8004cdd2a400066024602660206ea80192f5c11337120086466446600400400244b3001001801c4c8c96600266e45221000018acc004cdc7a4410000189bad3015002802a026899802002180c801a026375c6026002602c00280a0c8c8cc004004dd5980b180b98099baa0042259800800c00e26464b300133722911000018acc004cdc7a4410000189bab3016002802a028899802002180d001a028375c6028002602e00280a852f5bded8c0290004528201c30120018a518998010011809800a01a404066e08dd6980098061baa002375a601e60206020602060186ea8008c034c028dd50009180718079807800c5900818058009805980600098039baa0018b200a300800130083009001300800130033754011149a26cac80081",
+      "hash": "53daff3e4fed2ed85c99e693ed6a72071ee81495991edfe31d5abe43"
+    }
+  ],
+  "definitions": {
+    "ByteArray": {
+      "dataType": "bytes"
+    },
+    "Data": {
+      "title": "Data",
+      "description": "Any Plutus data."
+    },
+    "Int": {
+      "dataType": "integer"
+    },
+    "ecomint/MarketplaceDatum": {
+      "title": "MarketplaceDatum",
+      "anyOf": [
+        {
+          "title": "MarketplaceDatum",
+          "dataType": "constructor",
+          "index": 0,
+          "fields": [
+            {
+              "title": "seller_pkh",
+              "$ref": "#/definitions/ByteArray"
+            },
+            {
+              "title": "project_type",
+              "$ref": "#/definitions/Int"
+            },
+            {
+              "title": "carbon_amount",
+              "$ref": "#/definitions/Int"
+            },
+            {
+              "title": "price_per_unit_lovelace",
+              "$ref": "#/definitions/Int"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,13 @@
+.env
+.env.local
+.env.*
+*.env
+eco2/keys/
+eco2/env/
+node_modules/
+.next/
+out/
+build/
+.vercel/
+.DS_Store
+Thumbs.db
