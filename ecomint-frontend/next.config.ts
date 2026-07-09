@@ -1,7 +1,6 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  turbopack: false,
   webpack: (config) => {
     config.experiments = {
       ...config.experiments,
@@ -10,6 +9,8 @@ const nextConfig: NextConfig = {
     };
     return config;
   },
+
+  turbopack: {}, 
 };
 
 export default nextConfig;
