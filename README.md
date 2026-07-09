@@ -1,4 +1,4 @@
-EcoMint
+# EcoMint
 
 O EcoMint é um Aplicativo Descentralizado (dApp) construído na blockchain Cardano, focado na tokenização e negociação de créditos de carbono.
 
