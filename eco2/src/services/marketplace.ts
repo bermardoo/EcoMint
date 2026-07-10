@@ -22,6 +22,11 @@ const MarketplaceDatumSchema = Data.Object({
 // ==========================================
 export async function getContractAndTokenData(lucid: any, projectType: number) {
     const validator = blueprint.validators.find((v: any) => v.title.includes("ecomint"));
+    if (!validator) {
+        throw new Error("Validator 'ecomint' não encontrado no blueprint!");
+    }
+
+    const scriptValidator = { type: "PlutusV3", script: validator.compiledCode };
     const scriptValidator = { type: "PlutusV3", script: validator.compiledCode };
     const scriptAddress = validatorToAddress("Preview", scriptValidator);
 
