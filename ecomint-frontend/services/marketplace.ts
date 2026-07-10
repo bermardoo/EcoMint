@@ -17,17 +17,21 @@ const MarketplaceDatumSchema = Data.Object({
     price_per_unit_lovelace: Data.Integer(),
 });
 
+function stringToHex(str: string): string {
+    return Array.from(str)
+        .map(c => c.charCodeAt(0).toString(16).padStart(2, '0'))
+        .join('');
+}
+
 // ==========================================
 // CONFIGURAÇÃO BASE
 // ==========================================
 export async function getContractAndTokenData(lucid: any, projectType: number) {
     const validator = blueprint.validators.find((v: any) => v.title.includes("ecomint"));
     if (!validator) {
-        throw new Error("Validator 'ecomint' não encontrado no blueprint!");
+        throw new Error("Validator 'ecomint' not found in plutus.json");
     }
-
-    const scriptValidator = { type: "PlutusV3", script: validator.compiledCode };
-    const scriptValidator = { type: "PlutusV3", script: validator.compiledCode };
+    const scriptValidator = { type: "PlutusV3" as const, script: validator.compiledCode };
     const scriptAddress = validatorToAddress("Preview", scriptValidator);
 
     const userAddress = await lucid.wallet().address();
@@ -40,7 +44,7 @@ export async function getContractAndTokenData(lucid: any, projectType: number) {
     const policyId = mintingPolicyToId(mintingPolicy);
     
     const TOKEN_NAME = `EcoMint_Type${projectType}`;
-    const TOKEN_NAME_HEX = Buffer.from(TOKEN_NAME, "utf8").toString("hex");
+    const TOKEN_NAME_HEX = stringToHex(TOKEN_NAME);
     const unit = policyId + TOKEN_NAME_HEX;
 
     return { scriptValidator, scriptAddress, mintingPolicy, policyId, unit };
@@ -97,7 +101,7 @@ export async function listCredits(lucid: any, amount: number, priceUsd: number, 
     const tx = await lucid.newTx()
         .pay.ToContract(
             scriptAddress, 
-            { kind: "inline", value: Data.to(datum, MarketplaceDatumSchema) }, 
+            { kind: "inline", value: Data.to(datum, MarketplaceDatumSchema as any) }, 
             { lovelace: 2000000n, [unit]: BigInt(amount) }
         )
         .complete();

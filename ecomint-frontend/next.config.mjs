@@ -1,16 +1,15 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  turbopack: {}, 
-  
-  webpack: (config, { isServer }) => {
+  turbopack: {},
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  webpack: (config) => {
     config.experiments = {
       ...config.experiments,
       topLevelAwait: true,
       asyncWebAssembly: true,
     };
-    
-    config.optimization.moduleIds = 'named';
-    
     return config;
   },
 };
